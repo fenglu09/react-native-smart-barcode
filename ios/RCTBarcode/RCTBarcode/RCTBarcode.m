@@ -70,10 +70,14 @@
     }
     NSInteger scannerRectWidth = self.scannerRectWidth;//300;
     NSInteger scannerRectHeight = self.scannerRectHeight;//300;
+    // add by Stephen at 2019-07-19 start
+    // 接收js外部传入的scannerRectTop偏移值
+    NSInteger scannerRectTop = self.scannerRectTop;
+    // add by Stephen at 2019-07-19 end
     
     CGRect cameraRect = self.bounds;
     //中间的矩形框
-    self.scannerRect = CGRectMake( (cameraRect.size.width - scannerRectWidth) / 2, (cameraRect.size.height - scannerRectHeight - navigationHeight) / 2, scannerRectWidth, scannerRectHeight);
+    self.scannerRect = CGRectMake( (cameraRect.size.width - scannerRectWidth) / 2, (cameraRect.size.height - scannerRectHeight - navigationHeight) / 2 + scannerRectTop, scannerRectWidth, scannerRectHeight);
 
     RectView *view = [[RectView alloc] initWithScannerRect:self.scannerRect frame:self.bounds scannerRectCornerColor:self.scannerRectCornerColor];
 //    RectView *view = [[RectView alloc] initWithFrame:self.bounds];
@@ -177,7 +181,7 @@
     CGRect readerFrame = self.frame;
     CGSize viewFinderSize = self.scannerRect.size;
     CGRect scanLineframe = self.scanLine.frame;
-    scanLineframe.origin.y = (readerFrame.size.height - viewFinderSize.height - navigationHeight)/2;
+    scanLineframe.origin.y = (readerFrame.size.height - viewFinderSize.height - navigationHeight)/2 + self.scannerRectTop;
     self.scanLine.frame = scanLineframe;
     self.scanLine.hidden = NO;
     __weak __typeof(self) weakSelf = self;
@@ -186,7 +190,7 @@
                          CGRect scanLineframe = weakSelf.scanLine.frame;
                          scanLineframe.origin.y =
                          (readerFrame.size.height + viewFinderSize.height - navigationHeight)/2 -
-                         weakSelf.scanLine.frame.size.height;
+                         weakSelf.scanLine.frame.size.height + self.scannerRectTop;
                          weakSelf.scanLine.frame = scanLineframe;
                      }
                      completion:^(BOOL finished) {

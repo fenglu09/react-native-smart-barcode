@@ -1,7 +1,6 @@
 package com.reactnativecomponent.barcode;
 
 import android.os.Environment;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -16,6 +15,8 @@ import com.reactnativecomponent.barcode.decoding.DecodeUtil;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
+import androidx.annotation.Nullable;
 
 
 public class RCTCaptureModule extends ReactContextBaseJavaModule {

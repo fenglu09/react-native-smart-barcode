@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.os.Build;
-import android.support.annotation.ColorInt;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +24,8 @@ import com.reactnativecomponent.barcode.decoding.BitmapDecoder;
 import com.reactnativecomponent.barcode.decoding.BitmapUtils;
 
 import java.util.Hashtable;
+
+import androidx.annotation.ColorInt;
 
 
 /**
@@ -447,7 +448,9 @@ public class QRUtils {
         Canvas cv = new Canvas(newBitmap);
         cv.drawBitmap(first, 0, 0, null);
         cv.drawBitmap(second, fromPoint.x, fromPoint.y, null);
-        cv.save(Canvas.ALL_SAVE_FLAG);
+//        cv.save(Canvas.ALL_SAVE_FLAG);
+        cv.save();
+
         cv.restore();
 
         return newBitmap;
@@ -476,7 +479,8 @@ public class QRUtils {
         Canvas canvas = new Canvas(newb);
         canvas.drawBitmap(src, 0, 0, null);
         canvas.drawBitmap(watermark, paddingLeft, paddingTop, null);
-        canvas.save(Canvas.ALL_SAVE_FLAG);
+//        canvas.save(Canvas.ALL_SAVE_FLAG);
+        canvas.save();// add by david at 2019-9-21
         canvas.restore();
         return newb;
     }
